@@ -26,6 +26,8 @@ Fast - Respond quickly to user interactions with silky smooth animations and no 
 </template>
 
 <script>
+import axios from 'axios'
+import {mapState} from 'vuex'
 let state = {
     appHeaderState: {
         show: true,
@@ -66,8 +68,26 @@ export default {
             setTimeout(resolve, 500);
         });
     },
+    // async asyncData() {
+    //     // let result = await axios(`https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%202151849&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`);
+    //     // let condition = result.data.query.results.channel.item.condition;
+    //     let result = await axios('/api')
+    //     console.log(result)
+    //     // console.log(`Weather of Shanghai: ${condition.text}, ${condition.temp}°F`);
+    // },
+    async asnycWeather({store, route}) {
+      await store.dispatch('detail/setWeather', {woeid: 2151849})
+    },
     activated() {
         setState(this.$store);
+    },
+    computed: {
+      ...mapState('detail', [
+        'weather'
+      ])
+    },
+    created() {
+      console.log(`Weather of Shanghai: ${this.weather.text}, ${this.weather.temp}°F`);
     }
 };
 </script>

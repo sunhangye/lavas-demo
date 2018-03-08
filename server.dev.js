@@ -23,10 +23,10 @@ if (process.argv.length >= 3 && process.argv[2] !== 'dev') {
  */
 const proxyTable = {
     // proxy table example
-    // '/api': {
-    //     target: 'https://lavas.baidu.com',
-    //     changeOrigin: true
-    // }
+    '/api': {
+        target: 'https://lavas.baidu.com',
+        changeOrigin: true
+    }
 };
 
 let port = process.env.PORT || 3000;
@@ -85,4 +85,3 @@ core.init(process.env.NODE_ENV || 'development', true, {configPath})
 process.on('unhandledRejection', err => {
     console.warn(err);
 });
-
